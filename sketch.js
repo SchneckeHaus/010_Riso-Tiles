@@ -25,11 +25,11 @@ function fillInk (x,y){
     // NOTE: variables only live inside their own function. To use another function's value, call it and store it.
     let n = noiseFunction(x, y)
     if (n < 0.4) {
-        fill(inks.blue)
+        return inks.blue
     } else if (n < 0.6) {
-        fill(inks.pink)
+        return inks.pink
     } else {
-        fill(inks.yellow)
+        return inks.yellow
     }
 }
 
@@ -38,8 +38,8 @@ function DrawGrid (){
       for (let y = 0; y < ROW_AMOUNT; y++) {
         let px = x * CELL_SIZE;
         let py = y * CELL_SIZE;
-        // NOTE: fillInk already calls fill(), so don't wrap it in another fill(). Only wrap a function that returns a value.
-        fillInk(x,y);
+        // NOTE: fillInk now returns a colour instead of calling fill(), so it's wrapped in fill() here. Only wrap a function that returns a value.
+        fill(fillInk(x, y));
         noStroke();
         
         rect (px,py,CELL_SIZE,CELL_SIZE);
